@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2 class="page-header">Login</h2>
+
+<div class="glyphicon-align-center">
+    <form action="/Account/LoginCheck" method="post">
+        <label for="username">Tên tài khoản</label><br>
+        <input type="text" name="TenDN" class="input-sm" placeholder="username...">
+        <p></p>
+        <label for="passw">Mật khẩu</label><br>
+        <input type="text" name="MatKhau" class="input-sm" placeholder="password...">
+
+        <p></p>
+        <hr>
+        <button type="submit" class="btn btn-default btn-sm ">
+            <span class="glyphicon glyphicon-log-in"></span> Log in
+        </button>
+    </form>
+</div>
+

@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLBHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CA">
+    <Key>
+      <PropertyRef Name="MaCa" />
+    </Key>
+    <Property Name="MaCa" Type="int" Nullable="false" />
+    <Property Name="LuongCa" Type="int" />
+  </EntityType>
+  <EntityType Name="CHITIET_HD">
+    <Key>
+      <PropertyRef Name="MaHD" />
+      <PropertyRef Name="MaSP" />
+    </Key>
+    <Property Name="MaHD" Type="int" Nullable="false" />
+    <Property Name="MaSP" Type="int" Nullable="false" />
+    <Property Name="SoLuong" Type="int" />
+  </EntityType>
+  <EntityType Name="DOANHTHU_THANG">
+    <Key>
+      <PropertyRef Name="ThangBH" />
+      <PropertyRef Name="NamBH" />
+    </Key>
+    <Property Name="ThangBH" Type="int" Nullable="false" />
+    <Property Name="NamBH" Type="int" Nullable="false" />
+    <Property Name="DoanhThu_TH" Type="int" />
+    <Property Name="TongGiaSP_TH" Type="int" />
+    <Property Name="TongLuong_NV" Type="int" />
+  </EntityType>
+  <EntityType Name="HOADON">
+    <Key>
+      <PropertyRef Name="MaHD" />
+    </Key>
+    <Property Name="MaHD" Type="int" Nullable="false" />
+    <Property Name="TongTien" Type="int" />
+    <Property Name="TongGiaSP" Type="int" />
+    <Property Name="Ngay" Type="int" />
+    <Property Name="Thang" Type="int" />
+    <Property Name="Nam" Type="int" />
+    <Property Name="TT_HD" Type="bit" />
+  </EntityType>
+  <EntityType Name="LUONG">
+    <Key>
+      <PropertyRef Name="MaNV" />
+      <PropertyRef Name="NgayTL" />
+    </Key>
+    <Property Name="MaNV" Type="int" Nullable="false" />
+    <Property Name="NgayTL" Type="int" Nullable="false" />
+    <Property Name="Luong" Type="int" />
+  </EntityType>
+  <EntityType Name="NHANVIEN">
+    <Key>
+      <PropertyRef Name="MaNV" />
+    </Key>
+    <Property Name="MaNV" Type="int" Nullable="false" />
+    <Property Name="HoTen" Type="nvarchar" MaxLength="30" />
+    <Property Name="GT" Type="bit" />
+    <Property Name="CMND" Type="int" />
+    <Property Name="SDT" Type="int" />
+    <Property Name="TT_LamViec" Type="bit" />
+    <Property Name="MatKhau" Type="varchar" MaxLength="20" />
+    <Property Name="QuanLi" Type="int" />
+  </EntityType>
+  <EntityType Name="PHANCONG">
+    <Key>
+      <PropertyRef Name="MaCa" />
+      <PropertyRef Name="MaNV" />
+    </Key>
+    <Property Name="MaCa" Type="int" Nullable="false" />
+    <Property Name="MaNV" Type="int" Nullable="false" />
+    <Property Name="HeSo" Type="int" />
+  </EntityType>
+  <EntityType Name="SANPHAM">
+    <Key>
+      <PropertyRef Name="MaSP" />
+    </Key>
+    <Property Name="MaSP" Type="int" Nullable="false" />
+    <Property Name="HinhSP" Type="image" />
+    <Property Name="TenSP" Type="nvarchar" MaxLength="50" />
+    <Property Name="TT_Ban" Type="bit" />
+    <Property Name="GiaSP" Type="int" />
+    <Property Name="GiaBan" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK__LUONG__MaNV__73BA3083">
+    <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="1" />
+    <End Role="LUONG" Type="Self.LUONG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NHANVIEN">
+        <PropertyRef Name="MaNV" />
+      </Principal>
+      <Dependent Role="LUONG">
+        <PropertyRef Name="MaNV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PHANCONG__MaCa__6FE99F9F">
+    <End Role="CA" Type="Self.CA" Multiplicity="1" />
+    <End Role="PHANCONG" Type="Self.PHANCONG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CA">
+        <PropertyRef Name="MaCa" />
+      </Principal>
+      <Dependent Role="PHANCONG">
+        <PropertyRef Name="MaCa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PHANCONG__MaNV__70DDC3D8">
+    <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="1" />
+    <End Role="PHANCONG" Type="Self.PHANCONG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NHANVIEN">
+        <PropertyRef Name="MaNV" />
+      </Principal>
+      <Dependent Role="PHANCONG">
+        <PropertyRef Name="MaNV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CT_HD">
+    <End Role="HOADON" Type="Self.HOADON" Multiplicity="1" />
+    <End Role="CHITIET_HD" Type="Self.CHITIET_HD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HOADON">
+        <PropertyRef Name="MaHD" />
+      </Principal>
+      <Dependent Role="CHITIET_HD">
+        <PropertyRef Name="MaHD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CT_SP">
+    <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
+    <End Role="CHITIET_HD" Type="Self.CHITIET_HD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SANPHAM">
+        <PropertyRef Name="MaSP" />
+      </Principal>
+      <Dependent Role="CHITIET_HD">
+        <PropertyRef Name="MaSP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QLBHModelStoreContainer">
+    <EntitySet Name="CA" EntityType="Self.CA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CHITIET_HD" EntityType="Self.CHITIET_HD" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DOANHTHU_THANG" EntityType="Self.DOANHTHU_THANG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HOADON" EntityType="Self.HOADON" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LUONG" EntityType="Self.LUONG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PHANCONG" EntityType="Self.PHANCONG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SANPHAM" EntityType="Self.SANPHAM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__LUONG__MaNV__73BA3083" Association="Self.FK__LUONG__MaNV__73BA3083">
+      <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+      <End Role="LUONG" EntitySet="LUONG" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PHANCONG__MaCa__6FE99F9F" Association="Self.FK__PHANCONG__MaCa__6FE99F9F">
+      <End Role="CA" EntitySet="CA" />
+      <End Role="PHANCONG" EntitySet="PHANCONG" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PHANCONG__MaNV__70DDC3D8" Association="Self.FK__PHANCONG__MaNV__70DDC3D8">
+      <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+      <End Role="PHANCONG" EntitySet="PHANCONG" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CT_HD" Association="Self.FK_CT_HD">
+      <End Role="HOADON" EntitySet="HOADON" />
+      <End Role="CHITIET_HD" EntitySet="CHITIET_HD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CT_SP" Association="Self.FK_CT_SP">
+      <End Role="SANPHAM" EntitySet="SANPHAM" />
+      <End Role="CHITIET_HD" EntitySet="CHITIET_HD" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

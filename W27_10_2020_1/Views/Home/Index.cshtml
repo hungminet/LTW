@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    bool check = ViewBag.loginstatus;
+    W27_10_2020_1.Models.SINHVIEN sv = ViewBag.SinhVien;
+}
+
+@{ 
+    if(check)
+    {
+        <p>Tên sinh viên: <span>@sv.HoTen</span></p>
+    }
+    else
+    {
+
+    }
+}
+
+<div id="menu">
+    <li class="list-group-item" style="text-align: right;font-weight:bold;font-family:verdana;background-color:#efefef;">Danh Mục</li>
+    <a href="/Home/Index" class="list-group-item"><img src="https://img.icons8.com/android/24/000000/home.png" width="24" height="24" ><span class="pull-right"><i class="icon-chevron-right"></i></span> Trang Chủ</a>
+    <a href="/Account/TTSV" class="list-group-item "><img src="https://img.icons8.com/officel/50/000000/individual-server.png" width="24" height="24"><span class="pull-right"><i class="icon-chevron-right"></i></span> Thông tin sinh viên</a>
+    <hr>
+</div>

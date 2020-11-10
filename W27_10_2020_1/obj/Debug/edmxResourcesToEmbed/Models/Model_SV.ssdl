@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LTW_BT1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CHITIETDETAI">
+    <Key>
+      <PropertyRef Name="MaDT" />
+    </Key>
+    <Property Name="MaDT" Type="int" Nullable="false" />
+    <Property Name="SanPham" Type="nvarchar" MaxLength="50" />
+    <Property Name="MucTieu" Type="nvarchar" MaxLength="50" />
+    <Property Name="YeuCau" Type="nvarchar" MaxLength="50" />
+    <Property Name="KhacCN" Type="bit" />
+    <Property Name="TrangThai" Type="bit" />
+    <Property Name="SLSinhVien" Type="int" />
+    <Property Name="DiemDT" Type="real" />
+    <Property Name="ChuThich" Type="nvarchar" MaxLength="50" />
+    <Property Name="NienKhoa" Type="nvarchar" MaxLength="50" />
+    <Property Name="TruongNhom" Type="int" />
+  </EntityType>
+  <EntityType Name="CHUYENNGANH">
+    <Key>
+      <PropertyRef Name="MaCN" />
+    </Key>
+    <Property Name="MaCN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenCN" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="DANGKY">
+    <Key>
+      <PropertyRef Name="MaSV" />
+      <PropertyRef Name="MaCN" />
+    </Key>
+    <Property Name="MaSV" Type="int" Nullable="false" />
+    <Property Name="MaCN" Type="int" Nullable="false" />
+    <Property Name="DoUT" Type="int" />
+    <Property Name="TrangThai" Type="bit" />
+  </EntityType>
+  <EntityType Name="DETAI">
+    <Key>
+      <PropertyRef Name="MaDT" />
+    </Key>
+    <Property Name="MaDT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenDT" Type="nvarchar" MaxLength="50" />
+    <Property Name="MaLDT" Type="int" />
+    <Property Name="GVHD" Type="int" />
+    <Property Name="GVPB" Type="int" />
+  </EntityType>
+  <EntityType Name="GIANGVIEN">
+    <Key>
+      <PropertyRef Name="MaGV" />
+    </Key>
+    <Property Name="MaGV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
+    <Property Name="SDT" Type="varchar" MaxLength="15" />
+    <Property Name="GioiTinh" Type="bit" />
+    <Property Name="NgaySinh" Type="date" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
+    <Property Name="Anh" Type="image" />
+    <Property Name="TrangThai" Type="bit" />
+    <Property Name="HocVi" Type="nvarchar" MaxLength="50" />
+    <Property Name="MaCN" Type="int" />
+  </EntityType>
+  <EntityType Name="LOAIDETAI">
+    <Key>
+      <PropertyRef Name="MaLDT" />
+    </Key>
+    <Property Name="MaLDT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ChiTiet" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="SINHVIEN">
+    <Key>
+      <PropertyRef Name="MaSV" />
+    </Key>
+    <Property Name="MaSV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
+    <Property Name="SDT" Type="varchar" MaxLength="15" />
+    <Property Name="GioiTinh" Type="bit" />
+    <Property Name="NgaySinh" Type="date" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
+    <Property Name="Anh" Type="image" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Lop" Type="varchar" MaxLength="50" />
+    <Property Name="TrangThai" Type="bit" />
+    <Property Name="MaDT" Type="int" />
+    <Property Name="MaCN" Type="int" />
+  </EntityType>
+  <EntityType Name="TAIKHOAN">
+    <Key>
+      <PropertyRef Name="MaTK" />
+    </Key>
+    <Property Name="MaTK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenDN" Type="varchar" MaxLength="50" />
+    <Property Name="MatKhau" Type="varchar" MaxLength="50" />
+    <Property Name="TrangThai" Type="bit" />
+    <Property Name="MaSV" Type="int" />
+    <Property Name="MaGV" Type="int" />
+  </EntityType>
+  <EntityType Name="THONGBAO">
+    <Key>
+      <PropertyRef Name="MaTB" />
+    </Key>
+    <Property Name="MaTB" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TieuDe" Type="nvarchar" MaxLength="100" />
+    <Property Name="NoiDung" Type="ntext" />
+    <Property Name="NgayDang" Type="datetime" />
+  </EntityType>
+  <Association Name="FK__CHITIETDE__Truon__267ABA7A">
+    <End Role="SINHVIEN" Type="Self.SINHVIEN" Multiplicity="0..1" />
+    <End Role="CHITIETDETAI" Type="Self.CHITIETDETAI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SINHVIEN">
+        <PropertyRef Name="MaSV" />
+      </Principal>
+      <Dependent Role="CHITIETDETAI">
+        <PropertyRef Name="TruongNhom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CHITIETDET__MaDT__25869641">
+    <End Role="DETAI" Type="Self.DETAI" Multiplicity="1" />
+    <End Role="CHITIETDETAI" Type="Self.CHITIETDETAI" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="DETAI">
+        <PropertyRef Name="MaDT" />
+      </Principal>
+      <Dependent Role="CHITIETDETAI">
+        <PropertyRef Name="MaDT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DANGKY__MaCN__2A4B4B5E">
+    <End Role="CHUYENNGANH" Type="Self.CHUYENNGANH" Multiplicity="1" />
+    <End Role="DANGKY" Type="Self.DANGKY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CHUYENNGANH">
+        <PropertyRef Name="MaCN" />
+      </Principal>
+      <Dependent Role="DANGKY">
+        <PropertyRef Name="MaCN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DANGKY__MaSV__29572725">
+    <End Role="SINHVIEN" Type="Self.SINHVIEN" Multiplicity="1" />
+    <End Role="DANGKY" Type="Self.DANGKY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SINHVIEN">
+        <PropertyRef Name="MaSV" />
+      </Principal>
+      <Dependent Role="DANGKY">
+        <PropertyRef Name="MaSV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DETAI__GVHD__1A14E395">
+    <End Role="GIANGVIEN" Type="Self.GIANGVIEN" Multiplicity="0..1" />
+    <End Role="DETAI" Type="Self.DETAI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GIANGVIEN">
+        <PropertyRef Name="MaGV" />
+      </Principal>
+      <Dependent Role="DETAI">
+        <PropertyRef Name="GVHD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DETAI__GVPB__1B0907CE">
+    <End Role="GIANGVIEN" Type="Self.GIANGVIEN" Multiplicity="0..1" />
+    <End Role="DETAI" Type="Self.DETAI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GIANGVIEN">
+        <PropertyRef Name="MaGV" />
+      </Principal>
+      <Dependent Role="DETAI">
+        <PropertyRef Name="GVPB" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DETAI__MaLDT__1920BF5C">
+    <End Role="LOAIDETAI" Type="Self.LOAIDETAI" Multiplicity="0..1" />
+    <End Role="DETAI" Type="Self.DETAI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOAIDETAI">
+        <PropertyRef Name="MaLDT" />
+      </Principal>
+      <Dependent Role="DETAI">
+        <PropertyRef Name="MaLDT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GIANGVIEN__MaCN__145C0A3F">
+    <End Role="CHUYENNGANH" Type="Self.CHUYENNGANH" Multiplicity="0..1" />
+    <End Role="GIANGVIEN" Type="Self.GIANGVIEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CHUYENNGANH">
+        <PropertyRef Name="MaCN" />
+      </Principal>
+      <Dependent Role="GIANGVIEN">
+        <PropertyRef Name="MaCN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SINHVIEN__MaCN__1ED998B2">
+    <End Role="CHUYENNGANH" Type="Self.CHUYENNGANH" Multiplicity="0..1" />
+    <End Role="SINHVIEN" Type="Self.SINHVIEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CHUYENNGANH">
+        <PropertyRef Name="MaCN" />
+      </Principal>
+      <Dependent Role="SINHVIEN">
+        <PropertyRef Name="MaCN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SINHVIEN__MaDT__1DE57479">
+    <End Role="DETAI" Type="Self.DETAI" Multiplicity="0..1" />
+    <End Role="SINHVIEN" Type="Self.SINHVIEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DETAI">
+        <PropertyRef Name="MaDT" />
+      </Principal>
+      <Dependent Role="SINHVIEN">
+        <PropertyRef Name="MaDT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TAIKHOAN__MaGV__22AA2996">
+    <End Role="GIANGVIEN" Type="Self.GIANGVIEN" Multiplicity="0..1" />
+    <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GIANGVIEN">
+        <PropertyRef Name="MaGV" />
+      </Principal>
+      <Dependent Role="TAIKHOAN">
+        <PropertyRef Name="MaGV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TAIKHOAN__MaSV__21B6055D">
+    <End Role="SINHVIEN" Type="Self.SINHVIEN" Multiplicity="0..1" />
+    <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SINHVIEN">
+        <PropertyRef Name="MaSV" />
+      </Principal>
+      <Dependent Role="TAIKHOAN">
+        <PropertyRef Name="MaSV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LTW_BT1ModelStoreContainer">
+    <EntitySet Name="CHITIETDETAI" EntityType="Self.CHITIETDETAI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CHUYENNGANH" EntityType="Self.CHUYENNGANH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DANGKY" EntityType="Self.DANGKY" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DETAI" EntityType="Self.DETAI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GIANGVIEN" EntityType="Self.GIANGVIEN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LOAIDETAI" EntityType="Self.LOAIDETAI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SINHVIEN" EntityType="Self.SINHVIEN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TAIKHOAN" EntityType="Self.TAIKHOAN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="THONGBAO" EntityType="Self.THONGBAO" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__CHITIETDE__Truon__267ABA7A" Association="Self.FK__CHITIETDE__Truon__267ABA7A">
+      <End Role="SINHVIEN" EntitySet="SINHVIEN" />
+      <End Role="CHITIETDETAI" EntitySet="CHITIETDETAI" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CHITIETDET__MaDT__25869641" Association="Self.FK__CHITIETDET__MaDT__25869641">
+      <End Role="DETAI" EntitySet="DETAI" />
+      <End Role="CHITIETDETAI" EntitySet="CHITIETDETAI" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DANGKY__MaCN__2A4B4B5E" Association="Self.FK__DANGKY__MaCN__2A4B4B5E">
+      <End Role="CHUYENNGANH" EntitySet="CHUYENNGANH" />
+      <End Role="DANGKY" EntitySet="DANGKY" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DANGKY__MaSV__29572725" Association="Self.FK__DANGKY__MaSV__29572725">
+      <End Role="SINHVIEN" EntitySet="SINHVIEN" />
+      <End Role="DANGKY" EntitySet="DANGKY" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DETAI__GVHD__1A14E395" Association="Self.FK__DETAI__GVHD__1A14E395">
+      <End Role="GIANGVIEN" EntitySet="GIANGVIEN" />
+      <End Role="DETAI" EntitySet="DETAI" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DETAI__GVPB__1B0907CE" Association="Self.FK__DETAI__GVPB__1B0907CE">
+      <End Role="GIANGVIEN" EntitySet="GIANGVIEN" />
+      <End Role="DETAI" EntitySet="DETAI" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DETAI__MaLDT__1920BF5C" Association="Self.FK__DETAI__MaLDT__1920BF5C">
+      <End Role="LOAIDETAI" EntitySet="LOAIDETAI" />
+      <End Role="DETAI" EntitySet="DETAI" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GIANGVIEN__MaCN__145C0A3F" Association="Self.FK__GIANGVIEN__MaCN__145C0A3F">
+      <End Role="CHUYENNGANH" EntitySet="CHUYENNGANH" />
+      <End Role="GIANGVIEN" EntitySet="GIANGVIEN" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SINHVIEN__MaCN__1ED998B2" Association="Self.FK__SINHVIEN__MaCN__1ED998B2">
+      <End Role="CHUYENNGANH" EntitySet="CHUYENNGANH" />
+      <End Role="SINHVIEN" EntitySet="SINHVIEN" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SINHVIEN__MaDT__1DE57479" Association="Self.FK__SINHVIEN__MaDT__1DE57479">
+      <End Role="DETAI" EntitySet="DETAI" />
+      <End Role="SINHVIEN" EntitySet="SINHVIEN" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TAIKHOAN__MaGV__22AA2996" Association="Self.FK__TAIKHOAN__MaGV__22AA2996">
+      <End Role="GIANGVIEN" EntitySet="GIANGVIEN" />
+      <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TAIKHOAN__MaSV__21B6055D" Association="Self.FK__TAIKHOAN__MaSV__21B6055D">
+      <End Role="SINHVIEN" EntitySet="SINHVIEN" />
+      <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

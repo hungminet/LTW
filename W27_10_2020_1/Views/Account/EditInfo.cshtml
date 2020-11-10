@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "EditInfo";
+    W27_10_2020_1.Models.SINHVIEN sv = ViewBag.SinhVien;
+}
+
+<h2>Edit Student's Information</h2>
+<form action="/Account/Edit" method="post">
+    <img class="img-circle" src="./" alt="Student image">
+    <p class="list-group-item">Student ID: <span>@sv.MaSV</span></p>
+    <p class="list-group-item">Full name: <span><input type="text" name="HoTen" class="input-sm" placeholder="name..."></span></p>
+    <p class="list-group-item">Birthday: <span><input type="datetime-local" name="NgaySinh" class="input-sm" placeholder="birhday..."></span></p>
+    <p class="list-group-item">Class: <span><input type="text" name="Lop" class="input-sm" placeholder="class..."></span></p>
+    <p class="list-group-item">Email: <span><input type="text" name="Email" class="input-sm" placeholder="email..."></span></p>
+    <p class="list-group-item">Phone: <span><input type="text" name="SDT" class="input-sm" placeholder="phone number..."></span></p>
+    <p class="list-group-item">Major: <span>Information Technology</span></p>
+    <p></p>
+    <input type="submit" name="submit" />
+</form>
